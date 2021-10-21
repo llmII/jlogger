@@ -1,10 +1,13 @@
-(defn nop [&]
-  ())
+(defn nop
+  "A function that does nothing, a no-op."
+  [&])
 
-(defn tnop [&]
-  true)
+(defn tnop
+  "A function that returns true no matter the arguments presented."
+  [&] true)
 
-(defn dnop [& rest]
+(defn pnop
+  "A function that returns whatever is given to it."
   ;rest)
 
 (defn partial-method
@@ -13,14 +16,3 @@
   (if (zero? (length applied-args))
     (fn [self & args] (f self ;args))
     (fn [self & args] (f self ;applied-args ;args))))
-
-(defn datestr
-  ```
-  Turns the provided date `date` struct into a string like:
-    YYYY/MM/DD HH:MM:SS
-  ```
-  [date]
-  # YYYY/MM/DD HH:MM:SS
-  (string/format "%.4d.%.2d.%.2d %.2d:%.2d:%.2d"
-                 (date :year) (date :month) (date :month-day)
-                 (date :hours) (date :minutes) (date :seconds)))
