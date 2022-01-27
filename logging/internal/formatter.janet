@@ -20,20 +20,29 @@
 # [:date {:format "strftime format here"}]
 #
 # Default order and format literals:
-#   [section/level date] formatted [tags]\nrest\n
+#   [section/level date] formatted - tags: [tags] - props: props\nrest\n
 (defproto %text-formatter ()
   settings {:init? true})
 
+# NOTE: jsys does not support timezones in date-string due to needing locale
+# setup for the running application prior to calls to date-string! Either need
+# to get jsys to always do locale setup, or the application needs to do this
+# itself till jsys handles it, if using timezones in date-string.
+#
+# For now, props and rest have crippled formatters so to say. Might be worth
+# it to fix it to have a better formatting option in the future, or maybe this
+# is more than good enough.
 (def default-text-format
   [                                        "["
    [:section   {:format "%s"}]             "/"
    [:level     {:format "%-10s"}]          " "
    [:date      {:format "%a %b %d %X %Y"}] "]"
-   [:formatted {:format "%s"}]             " "
+   [:formatted {:format "%s"}]     " - tags: "
    [:tags      {:separator " "
                 :prefix    "#"
                 :lead      "["
-                :tail      "]"}]           "\n"
+                :tail      "]"}]   " - props: "
+   [:props     {:format "%n"}]             "\n"
    [:rest      {:format "%m"}]             "\n"])
 
 (defn- process-format [entry field buf]
@@ -71,6 +80,7 @@
 #   args    optional (is nil)   none, is consumed by format
 #   tags    optional (is nil)   {:separator " "
 #                                :prefix    "#"}
+#   props   optional (is nil)   "%n"
 #   rest    optional (is nil)   "%m"
 (defmethod format %text-formatter [self data]
   (let [ret   @""]
