@@ -24,7 +24,7 @@
 
 # %drain-base ****************************************************************
 (defproto %drain-base ())
-(defmethod drain %drain-base [self method entry])
+(defmethod drain %drain-base [self method &opt entry])
 (defmethod wrap-sink? %drain-base [self])
 
 # %immediate-drain ***********************************************************
@@ -46,11 +46,7 @@
       (put self :opened false)
       [:close]))
 
-(defn- immediate-close []
-  (put self :opened false)
-  [:close [:stat {:written empty-stat :synced empty-stat}]])
-
-(defmethod drain %immediate-drain [self method entry]
+(defmethod drain %immediate-drain [self method &opt entry]
   (match method
     :write (immediate-flush entry)
     :flush (immediate-flush)
@@ -130,7 +126,7 @@
     (when (= :buffer ((@ settings) :action))
       [[%common-drain-sink] []])))
 
-(defmethod drain %common-drain [self method entry]
+(defmethod drain %common-drain [self method &opt entry]
   (match method
     :write (common-drain-write entry)
     :flush (common-drain-flush)
@@ -146,7 +142,7 @@
       (set (@ drains) drains))
     (error (drain-errors :no-drains-combo-drain))))
 
-(defmethod drain %combo-drain [self method entry]
+(defmethod drain %combo-drain [self method &opt entry]
   (let [ret @[]
         stat @{}]
     (map
