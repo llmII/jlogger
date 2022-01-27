@@ -5,7 +5,7 @@
 # Defines a manageable logging object that besides writing into a sink may or
 # may not have extra filtering mechanisms attached.
 
-# %log ***********************************************************************
+# %log-base ******************************************************************
 (defproto %log-base ())
 # minimum is going to be {:level :rest} for `rest` but could be more to it
 (defmethod write %log-base [self level & rest])
@@ -33,7 +33,8 @@
           [:stat {:written wrote :synced sunk}]
           (do
             (put (ret :written) wrote)
-            (put (ret :synced) sunk)))))))
+            (put (ret :synced) sunk))))
+      ret)))
 
 (defmethod _init %log [self]
   (with-slots %log self

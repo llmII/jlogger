@@ -10,4 +10,4 @@
   ```)
 
 (declare-source
-  :source ["logging.janet" "logging"])
+  :source ["logging"])
