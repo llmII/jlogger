@@ -2,6 +2,11 @@
 (use sys)
 (use logging/entry)
 
+# formatters
+# ----------------------------------------------------------------------------
+
+# %formatter *****************************************************************
+# Base formatter from which others derive.
 (defproto %formatter ()
   state    {}
   settings {})
@@ -9,7 +14,7 @@
 (defmethod format %formatter [self data]
   (string/format "%m" data))
 
-
+# %text-formatter ************************************************************
 # expects in settings:
 #   format
 #
