@@ -88,7 +88,7 @@
 #   props   optional (is nil)   "%n"
 #   rest    optional (is nil)   "%m"
 (defmethod format %text-formatter [self data]
-  (let [ret   @""]
+  (let [ret @""]
     (each fp ((settings self) :format)
       (match (type fp)
         :string (buffer/push ret fp)
