@@ -157,5 +157,5 @@
 (defmethod stat %logger [self]
   (with-slots %logger self
     (reduce2
-      |(if (= (stat/comp $2 $1) 1) $2 $1)
+      |(if (= (stat/comp $2 $1) -1) $2 $1)
       (@ stats))))
