@@ -49,17 +49,18 @@
       0)))
 
 (extend-multi
-  stat/comp [_] [(o (base-stat-entry? o))]
+  stat/comp [_] [(o (base-stat-entry? (o :synced)))]
   [a b]
   (compare-stat a b))
 
 (extend-multi
-  stat/comp [(o (base-stat-entry? o))] [_]
+  stat/comp [(o (base-stat-entry? (o :synced)))] [_]
   [a b]
   (compare-stat a b))
 
 (extend-multi
-  stat/comp [(o (base-stat-entry? o))] [(o (base-stat-entry? o))]
+  stat/comp
+  [(o (base-stat-entry? (o :synced)))] [(n (base-stat-entry? (n :synced)))]
   [a b]
   (compare-stat a b))
 

@@ -154,5 +154,7 @@
 # Statistics per write +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # This is an open multi-method because we may need to add native types as well
 # as things that are matchable
+# Compares a full stat (including both the written and synced)
 (declare-open-multi stat/compare)
+# Adds just the written or the synced part of a stat
 (declare-open-multi stat/add)
