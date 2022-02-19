@@ -14,6 +14,7 @@
 
 # %log ***********************************************************************
 (defproto %log %log-base
+  name      {:init? true} # used to identify each log for statistics purposes
   sink      {:init? true}
   filter    {:init? true}
   drain     {:init? true}

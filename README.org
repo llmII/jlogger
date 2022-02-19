@@ -1,0 +1,4 @@
+* TODO Add a drop repeat filter
+* TODO Add structured logging (json output)
+* TODO Add networked logging
+* TODO Add threaded logging

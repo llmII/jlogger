@@ -18,3 +18,7 @@
      "An attempt was made to create a filter with a disallowed form.\n\t"
      "Disallowed forms: %n\n\t"
      "Form:\n%s\n")})
+
+(def registry-errors
+  {:registry-insertion-error
+   "Duplicated insertion of %s in registry %s"})
